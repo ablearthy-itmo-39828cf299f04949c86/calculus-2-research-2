@@ -9,30 +9,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/ablearthy/docker-latex:1.1.0
+      volumes:
+        - latex_volume:/document
     
     steps:
       - uses: actions/checkout@v3
-      
-      - name: Restore Docker LaTeX Image Cache if it exists
-        id: cache-docker-latex
-        uses: actions/cache@v3
-        with:
-          path: ci/cache/docker/latex
-          key: cache-docker-latex-1.1.0
-          
-      - name: Update Docker LaTeX Image Cache if cache miss
-        if: steps.cache-docker-latex.outputs.cache-hit != 'true'
-        run: docker pull ghcr.io/ablearthy/docker-latex:1.1.0 && mkdir -p ci/cache/docker/latex && docker image save ghcr.io/ablearthy/docker-latex:1.1.0 --output ./ci/cache/docker/latex/docker-latex-1.1.0.tar
-
-      - name: Use Docker LaTeX Image Cache if cache hit
-        if: steps.cache-docker-latex.outputs.cache-hit == 'true'
-        run: docker image load --input ./ci/cache/docker/latex/docker-latex-1.1.0.tar
-
-
 
       - name: Build PDF
-        run: docker run -v ${{ github.workspace }}:/document ghcr.io/ablearthy/docker-latex:1.1.0 latexmk -xelatex -shell-escape main.tex
-        
+        run: latexmk -xelatex -shell-escape main.tex
+      
       - name: Set datetime release
         run: |
           export CUR_DATE=$(date +%Y-%m-%d-%T)
