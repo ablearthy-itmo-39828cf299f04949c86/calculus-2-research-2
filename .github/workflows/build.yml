@@ -20,10 +20,7 @@ jobs:
           
       - name: Update Docker LaTeX Image Cache if cache miss
         if: steps.cache-docker-latex.outputs.cache-hit != 'true'
-        run: |
-          docker pull ghcr.io/ablearthy/docker-latex:1.0.0
-          mkdir -p ci/cache/docker/latex
-          docker image save ghcr.io/ablearthy/docker-latex:1.0.0 --output ./ci/cache/docker/latex/docker-latex-1.0.0.tar
+        run: docker pull ghcr.io/ablearthy/docker-latex:1.0.0 && mkdir -p ci/cache/docker/latex && docker image save ghcr.io/ablearthy/docker-latex:1.0.0 --output ./ci/cache/docker/latex/docker-latex-1.0.0.tar
 
       - name: Use Docker LaTeX Image Cache if cache hit
         if: steps.cache-docker-latex.outputs.cache-hit == 'true'
