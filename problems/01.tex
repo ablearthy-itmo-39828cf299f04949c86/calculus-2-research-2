@@ -10,3 +10,102 @@
 \end{enumerate}
 
 \subsection{Решение}
+
+Для начала вычислим интеграл \(I\).
+\[
+  I^2 = \int_{0}^{\infty} e^{-x^2} \dd x \int_{0}^{\infty} e^{-y^2} \dd y
+  = \int_{0}^{\infty} \int_{0}^{\infty} e^{-x^2-y^2} \dd x \dd y
+  = \int_{0}^{\infty} \int_{0}^{\infty} e^{-(x^2+y^2)} \dd x \dd y
+\]
+Перейдём к полярным координатам. \(|J| = \rho\).
+\(\varphi \in [0; \frac{\pi}{2}]\), \(\rho \in [0;+\infty)\).
+Рассматривается только первая четверть, так как и \(x\), и \(y\)
+проходят только положительные значения.
+Тогда
+\[
+  \int_{0}^{\infty} \int_{0}^{\infty} e^{-(x^2+y^2)} \dd x \dd y
+  = \int_{0}^{\frac{\pi}{2}} \dd \varphi \int_{0}^{\infty} e^{-\rho^2} \rho \dd \rho
+  = -\frac{1}{2} \int_{0}^{\frac{\pi}{2}} \dd \varphi \int_{0}^{\infty} e^{-\rho^2} \dd(-\rho^2)
+  = -\frac{1}{2} \int_{0}^{\frac{\pi}{2}} \left. e^{-\rho^2}\right\rvert_{0}^{\infty}\dd \varphi
+  = -\frac{1}{2} \int_{0}^{\frac{\pi}{2}}
+    \left( \lim_{\rho \to +\infty} e^{-\rho^2} - 1 \right) \dd \varphi
+  = \frac{1}{2} \int_{0}^{\frac{\pi}{2}} \dd \varphi
+  = \frac{\pi}{4}
+\]
+
+Следовательно:
+\[ I = \frac{1}{2}\sqrt{\pi} \]
+
+Теперь докажем, что
+\begin{equation}\label{eq:01-sqrtt}
+  \frac{1}{\sqrt{t}} = \frac{2}{\sqrt{\pi}} \int_{0}^{\infty} e^{-u^2 t} \dd u
+\end{equation}
+
+Для этого выполним некоторые преобразования:
+\[
+  \int_{0}^{\infty} e^{-{(u \sqrt{t})}^2} \dd u
+  = \frac{1}{\sqrt{t}} \int_{0}^{\infty} e^{-{(u \sqrt{t})}^2} \dd(u \sqrt{t})
+  = \frac{1}{\sqrt{t}} \frac{\sqrt{\pi}}{2}
+\]
+
+В таком случае
+\[
+  \frac{1}{\sqrt{t}} = \frac{2}{\sqrt{\pi}} \int_{0}^{\infty} e^{-u^2 t} \dd u
+  = \frac{2}{\sqrt{\pi}} \frac{1}{\sqrt{t}} \frac{\sqrt{\pi}}{2}
+  = \frac{1}{\sqrt{t}} \qed
+\]
+
+Теперь вычислим \(\int_{0}^{\infty} \frac{\cos t}{\sqrt{t}} \dd t = J\).
+Воспользуемся равенством \ref{eq:01-sqrtt}.
+\[
+  \int_{0}^{\infty} \frac{\cos t}{\sqrt{t}} \dd t
+  = \int_{0}^{\infty} \cos t
+  \left(\frac{2}{\sqrt{\pi}} \int_{0}^{\infty}  e^{-u^2 t} \dd u \right) \dd t
+  = \frac{2}{\sqrt{\pi}} \int_{0}^{\infty} \int_{0}^{\infty} \cos t e^{-u^2 t} \dd u \dd t
+  = \frac{2}{\sqrt{\pi}} \int_{0}^{\infty} \dd u \int_{0}^{\infty} \cos t e^{-u^2 t} \dd t
+\]
+% TODO: обосновать смену порядка интегрирования
+
+Для начала вычислим первый интеграл:
+\[
+  \int_{0}^{\infty} \cos t e^{-u^2 t} \dd t
+  =
+  \begin{bmatrix}
+    x = e^{-u^2 t} & \dd y = \cos t \dd t \\
+    \dd x = -u^2 e^{-u^2 t} \dd t & y = \sin t
+  \end{bmatrix}
+  = \left.\left(e^{-u^2 t} \sin t\right)\right\rvert_{0}^{\infty}
+  + \int_{0}^{\infty} u^2 e^{-u^2 t} \sin t \dd t
+  =
+  \begin{bmatrix}
+    x = u^2 e^{-u^2 t} \dd t & \dd y = \sin t \dd t \\
+    \dd x = -u^4 e^{-u^2 t} \dd t & y = -\cos t
+  \end{bmatrix}
+  = \left.\left(-u^2 e^{-u^2 t} \cos t\right)\right\rvert_{0}^{\infty}
+  - u^4 \int_{0}^{\infty} e^{-u^2 t} \cos t \dd t
+  = u^2 - u^4 \int_{0}^{\infty} e^{-u^2 t} \cos t \dd t
+\]
+
+Отсюда выразим интеграл:
+\[
+  \int_{0}^{\infty} \cos t e^{-u^2 t} \dd t = \frac{u^2}{u^4 + 1}
+\]
+
+Подставим его и посчитаем интеграл \(J\).
+\[
+  \frac{2}{\sqrt{\pi}} \int_{0}^{\infty} \dd u \int_{0}^{\infty} \cos t e^{-u^2 t} \dd t
+  = \frac{2}{\sqrt{\pi}} \int_{0}^{\infty} \frac{u^2}{u^4 + 1} \dd u
+\]
+% TODO: вычислить интеграл
+
+Теперь вычислим интеграл
+\(K = \int_{0}^{\infty} \frac{\sin(3t + 3\pi/2)}{\sqrt{t}} \dd t\).
+\[
+  K
+  = -\int_{0}^{\infty} \frac{\cos(3t)}{\sqrt{t}} \dd t
+  = -\frac{\sqrt{3}}{3} \int_{0}^{\infty} \frac{\cos(3t)}{\sqrt{3t}} \dd(3t)
+  = -\frac{sqrt{3}}{3} \frac{\sqrt{\pi}}{\sqrt{2}}
+  = -\sqrt{\frac{\pi}{6}}
+\]
+
+%TODO: вычислить \int_{0}^{\infty} \cos(x^2) \dd x, \int_{0}^{\infty} \cos(\pi x^2 / 2) \dd x
