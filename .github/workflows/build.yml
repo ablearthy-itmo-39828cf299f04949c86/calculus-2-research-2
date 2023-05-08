@@ -12,7 +12,7 @@ jobs:
     container:
       image: ghcr.io/ablearthy/docker-latex:1.0.0
       volumes:
-        - .:/document
+        - latex_volume:/document
 
     steps:
       - uses: actions/checkout@v3
