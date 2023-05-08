@@ -37,3 +37,11 @@ jobs:
           tag_name: ${{ env.CUR_DATE_TAG }}
           prerelease: true
           files: ${{ env.REPO_NAME }}-${{ env.CUR_DATE }}.pdf
+        if: github.event_name != 'pull_request'
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.REPO_NAME }}-${{ env.CUR_DATE }}
+          path: ${{ env.REPO_NAME }}-${{ env.CUR_DATE }}.pdf
+        if: github.event_name == 'pull_request'
