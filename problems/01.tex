@@ -23,14 +23,16 @@
 проходят только положительные значения.
 Тогда
 \[
+\begin{split}
   \int_{0}^{\infty} \int_{0}^{\infty} e^{-(x^2+y^2)} \dd x \dd y
   = \int_{0}^{\frac{\pi}{2}} \dd \varphi \int_{0}^{\infty} e^{-\rho^2} \rho \dd \rho
-  = -\frac{1}{2} \int_{0}^{\frac{\pi}{2}} \dd \varphi \int_{0}^{\infty} e^{-\rho^2} \dd(-\rho^2)
+  = -\frac{1}{2} \int_{0}^{\frac{\pi}{2}} \dd \varphi \int_{0}^{\infty} e^{-\rho^2} \dd(-\rho^2) \\
   = -\frac{1}{2} \int_{0}^{\frac{\pi}{2}} \left. e^{-\rho^2}\right\rvert_{0}^{\infty}\dd \varphi
   = -\frac{1}{2} \int_{0}^{\frac{\pi}{2}}
     \left( \lim_{\rho \to +\infty} e^{-\rho^2} - 1 \right) \dd \varphi
   = \frac{1}{2} \int_{0}^{\frac{\pi}{2}} \dd \varphi
   = \frac{\pi}{4}
+\end{split}
 \]
 
 Следовательно:
@@ -43,8 +45,8 @@
 
 Для этого выполним некоторые преобразования:
 \[
-  \int_{0}^{\infty} e^{-{(u \sqrt{t})}^2} \dd u
-  = \frac{1}{\sqrt{t}} \int_{0}^{\infty} e^{-{(u \sqrt{t})}^2} \dd(u \sqrt{t})
+  \int_{0}^{\infty} e^{-{\left(u \sqrt{t}\right)}^2} \dd u
+  = \frac{1}{\sqrt{t}} \int_{0}^{\infty} e^{-{\left(u \sqrt{t}\right)}^2} \dd(u \sqrt{t})
   = \frac{1}{\sqrt{t}} \frac{\sqrt{\pi}}{2}
 \]
 
@@ -61,13 +63,17 @@
   \int_{0}^{\infty} \frac{\cos t}{\sqrt{t}} \dd t
   = \int_{0}^{\infty} \cos t
   \left(\frac{2}{\sqrt{\pi}} \int_{0}^{\infty}  e^{-u^2 t} \dd u \right) \dd t
-  = \frac{2}{\sqrt{\pi}} \int_{0}^{\infty} \int_{0}^{\infty} \cos t e^{-u^2 t} \dd u \dd t
+\]
+\(\cos t\) можно занести под внутренний интеграл, так как для
+переменной \(u\) это константа:
+\[
+  \frac{2}{\sqrt{\pi}} \int_{0}^{\infty} \int_{0}^{\infty} \cos t e^{-u^2 t} \dd u \dd t
   = \frac{2}{\sqrt{\pi}} \int_{0}^{\infty} \dd u \int_{0}^{\infty} \cos t e^{-u^2 t} \dd t
 \]
-% TODO: обосновать смену порядка интегрирования
 
 Для начала вычислим первый интеграл:
 \[
+\begin{split}
   \int_{0}^{\infty} \cos t e^{-u^2 t} \dd t
   =
   \begin{bmatrix}
@@ -75,15 +81,16 @@
     \dd x = -u^2 e^{-u^2 t} \dd t & y = \sin t
   \end{bmatrix}
   = \left.\left(e^{-u^2 t} \sin t\right)\right\rvert_{0}^{\infty}
-  + \int_{0}^{\infty} u^2 e^{-u^2 t} \sin t \dd t
+  + \int_{0}^{\infty} u^2 e^{-u^2 t} \sin t \dd t \\
   =
   \begin{bmatrix}
     x = u^2 e^{-u^2 t} \dd t & \dd y = \sin t \dd t \\
     \dd x = -u^4 e^{-u^2 t} \dd t & y = -\cos t
   \end{bmatrix}
   = \left.\left(-u^2 e^{-u^2 t} \cos t\right)\right\rvert_{0}^{\infty}
-  - u^4 \int_{0}^{\infty} e^{-u^2 t} \cos t \dd t
+  - u^4 \int_{0}^{\infty} e^{-u^2 t} \cos t \dd t \\
   = u^2 - u^4 \int_{0}^{\infty} e^{-u^2 t} \cos t \dd t
+\end{split}
 \]
 
 Отсюда выразим интеграл:
@@ -93,10 +100,60 @@
 
 Подставим его и посчитаем интеграл \(J\).
 \[
+\begin{split}
   \frac{2}{\sqrt{\pi}} \int_{0}^{\infty} \dd u \int_{0}^{\infty} \cos t e^{-u^2 t} \dd t
   = \frac{2}{\sqrt{\pi}} \int_{0}^{\infty} \frac{u^2}{u^4 + 1} \dd u
+  = \frac{1}{\sqrt{\pi}} \int_{0}^{\infty} \left(
+    \frac{u^2 + 1}{u^4 + 1}
+    + \frac{u^2 - 1}{u^4 + 1}
+  \right) \dd u \\
+  = \frac{1}{\sqrt{\pi}} \int_{0}^{\infty} \frac{u^2 + 1}{u^4 + 1} \dd u
+  + \frac{1}{\sqrt{\pi}} \int_{0}^{\infty} \frac{u^2 - 1}{u^4 + 1} \dd u
+\end{split}
 \]
-% TODO: вычислить интеграл
+
+\[
+\begin{split}
+  \int_{0}^{\infty} \frac{u^2 + 1}{u^4 + 1} \dd u
+  = \int_{0}^{\infty} \frac{1 + \frac{1}{u^2}}{u^2 + \frac{1}{u^2}} \dd u
+  = \int_{0}^{\infty}
+  \frac{\dd \left(u - \frac{1}{u}\right)}{2 + {\left(u - \frac{1}{u}\right)}^2}
+  = \frac{1}{\sqrt{2}} \left.
+  \arctan \left(\frac{u - \frac{1}{u}}{\sqrt{2}}\right)
+  \right\rvert_{0}^{\infty} \\
+  = \frac{1}{\sqrt{2}} \left(
+  \lim_{u \to +\infty} \arctan \left(\frac{u - \frac{1}{u}}{\sqrt{2}}\right)
+  - \lim_{u \to 0+} \arctan \left(\frac{u - \frac{1}{u}}{\sqrt{2}}\right)
+  \right)
+  = \frac{1}{\sqrt{2}} \left( \frac{\pi}{2} - \left(-\frac{\pi}{2}\right)\right)
+  = \frac{\pi}{\sqrt{2}}
+\end{split}
+\]
+
+Для решения второго интеграла воспользуемся схожей идеей:
+\[
+\begin{split}
+  \int_{0}^{\infty} \frac{u^2 - 1}{u^4 + 1} \dd u
+  = \int_{0}^{\infty} \frac{1 - \frac{1}{u^2}}{u^2 + \frac{1}{u^2}} \dd u
+  = -\int_{0}^{\infty}
+  \frac{\dd \left(u + \frac{1}{u}\right)}{2 - {\left(u + \frac{1}{u}\right)}^2}
+  = -\left.\frac{1}{2\sqrt{2}}\ln\left|\frac{\sqrt{2} + u + \frac{1}{u}}{\sqrt{2} - u - \frac{1}{u}}\right|\right\rvert_{0}^{\infty} \\
+  = -\frac{1}{2\sqrt{2}} \left(
+  \lim_{u \to +\infty} \ln\left|\frac{\sqrt{2} + u + \frac{1}{u}}{\sqrt{2} - u - \frac{1}{u}}\right|
+  - \lim_{u \to 0+} \ln\left|\frac{\sqrt{2} + u + \frac{1}{u}}{\sqrt{2} - u - \frac{1}{u}}\right|
+  \right) = 0
+\end{split}
+\]
+
+В итоге:
+\[
+\begin{split}
+  \int_{0}^{\infty} \frac{\cos t}{\sqrt{t}} dt
+  = \frac{1}{\sqrt{\pi}} \int_{0}^{\infty} \frac{u^2 + 1}{u^4 + 1} \dd u
+  + \frac{1}{\sqrt{\pi}} \int_{0}^{\infty} \frac{u^2 - 1}{u^4 + 1} \dd u
+  = \frac{1}{\sqrt{\pi}} \frac{\pi}{\sqrt{2}} = \sqrt{\frac{\pi}{2}}
+\end{split}
+\]
 
 Теперь вычислим интеграл
 \(K = \int_{0}^{\infty} \frac{\sin(3t + 3\pi/2)}{\sqrt{t}} \dd t\).
@@ -104,8 +161,22 @@
   K
   = -\int_{0}^{\infty} \frac{\cos(3t)}{\sqrt{t}} \dd t
   = -\frac{\sqrt{3}}{3} \int_{0}^{\infty} \frac{\cos(3t)}{\sqrt{3t}} \dd(3t)
-  = -\frac{sqrt{3}}{3} \frac{\sqrt{\pi}}{\sqrt{2}}
+  = -\frac{\sqrt{3}}{3} \frac{\sqrt{\pi}}{\sqrt{2}}
   = -\sqrt{\frac{\pi}{6}}
 \]
 
-%TODO: вычислить \int_{0}^{\infty} \cos(x^2) \dd x, \int_{0}^{\infty} \cos(\pi x^2 / 2) \dd x
+Вычислим \(\int_{0}^{\infty} \cos(x^2) \dd x\):
+\[
+  \int_{0}^{\infty} \cos(x^2) \dd x
+  = \int_{0}^{\infty} \frac{2x}{2x} \cos(x^2) \dd x
+  = \frac{1}{2} \int_{0}^{\infty} \frac{\cos(x^2)}{\sqrt{x^2}} \dd (x^2)
+  = \frac{1}{2} \sqrt{\frac{\pi}{2}}
+\]
+
+Вычислим \(\int_{0}^{\infty} \cos(\pi x^2 / 2) \dd x\):
+\[
+  \int_{0}^{\infty} \cos\left(\frac{\pi x^2}{2}\right) \dd x
+  = \sqrt{\frac{2}{\pi}} \int_{0}^{\infty} \cos{\left(\sqrt{\frac{\pi}{2}} x\right)}^2
+  \dd \left(\sqrt{\frac{\pi}{2}} x\right)
+  = \sqrt{\frac{2}{\pi}} \frac{1}{2}\sqrt{\frac{\pi}{2}} = \frac{1}{2}
+\]
