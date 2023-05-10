@@ -28,7 +28,7 @@ jobs:
           echo "REPO_NAME=${{ github.event.repository.name }}" >> $GITHUB_ENV
           
       - name: Rename main.pdf
-        run: mv main.pdf "$REPO_NAME-$CUR_DATE.pdf"
+        run: mv main.pdf "$REPO_NAME-$CUR_DATE_TAG.pdf"
       
       - name: Publish
         uses: softprops/action-gh-release@v1
@@ -36,12 +36,12 @@ jobs:
           name: ${{ env.CUR_DATE_TAG }}
           tag_name: ${{ env.CUR_DATE_TAG }}
           prerelease: true
-          files: ${{ env.REPO_NAME }}-${{ env.CUR_DATE }}.pdf
+          files: ${{ env.REPO_NAME }}-${{ env.CUR_DATE_TAG }}.pdf
         if: github.event_name != 'pull_request'
       
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.REPO_NAME }}-${{ env.CUR_DATE }}
-          path: ${{ env.REPO_NAME }}-${{ env.CUR_DATE }}.pdf
+          name: ${{ env.REPO_NAME }}-${{ env.CUR_DATE_TAG }}
+          path: ${{ env.REPO_NAME }}-${{ env.CUR_DATE_TAG }}.pdf
         if: github.event_name == 'pull_request'
