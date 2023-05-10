@@ -180,3 +180,127 @@
   \dd \left(\sqrt{\frac{\pi}{2}} x\right)
   = \sqrt{\frac{2}{\pi}} \frac{1}{2}\sqrt{\frac{\pi}{2}} = \frac{1}{2}
 \]
+
+\begin{figure}[!htbp]
+  \centering
+  \begin{subfigure}{0.45\textwidth}
+    \begin{tikzpicture}
+      \begin{axis}[
+        xmin = -3, xmax = 3,
+        axis x line = middle,
+        axis y line = middle,
+        xlabel= \(x\),
+        ylabel= \(\erf(x)\)
+        ]
+        \addplot[
+        samples=100,
+        smooth,
+        unbounded coords=jump,
+        no markers,
+        domain = -3:3] gnuplot {erf(x)};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{\(\erf(x)\)}
+  \end{subfigure}
+  \begin{subfigure}{0.45\textwidth}
+    \begin{tikzpicture}
+      \begin{axis}[
+        xmin = -3, xmax = 3,
+        axis x line = middle,
+        axis y line = middle,
+        xlabel = \(x\),
+        ylabel = \(e^{-x^2}\)
+        ]
+        \addplot[
+        samples=100,
+        smooth,
+        domain=-3:3] {e^(-x^2)};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{\(e^{-x^2}\)}
+  \end{subfigure}
+  \caption{Гауссова функция}
+\end{figure}
+
+\begin{figure}[!htbp]
+  \centering
+  \begin{subfigure}{0.45\textwidth}
+    \begin{tikzpicture}
+      \begin{axis}[
+        xmin = -5, xmax = 5,
+        axis x line = middle,
+        axis y line = middle,
+        xlabel= \(x\),
+        ylabel= \(\Phi_S(x)\)
+        ]
+        \addplot[
+        samples=100,
+        smooth,
+        unbounded coords=jump,
+        no markers,
+        domain = -5:5] gnuplot {FresnelS(x)};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{\(\Phi_S(x)\)}
+  \end{subfigure}
+  \begin{subfigure}{0.45\textwidth}
+    \begin{tikzpicture}
+      \begin{axis}[
+        xmin = 0, xmax = 25,
+        axis x line = middle,
+        axis y line = middle,
+        xlabel = \(x\),
+        ylabel = \(f(x)\)
+        ]
+        \addplot[
+        samples=1000,
+        smooth,
+        domain=0.01:25] {sin(deg(x))/(sqrt(x))};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{\(f(x) = \frac{\sin(x)}{\sqrt{x}}\)}
+  \end{subfigure}
+  \caption{\(\Phi_S\)}
+\end{figure}
+
+
+\begin{figure}[!htbp]
+  \centering
+  \begin{subfigure}{0.45\textwidth}
+    \begin{tikzpicture}
+      \begin{axis}[
+        xmin = -5, xmax = 5,
+        axis x line = middle,
+        axis y line = middle,
+        xlabel= \(x\),
+        ylabel= \(\Phi_C(x)\)
+        ]
+        \addplot[
+        samples=100,
+        smooth,
+        unbounded coords=jump,
+        no markers,
+        domain = -5:5] gnuplot {FresnelC(x)};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{\(\Phi_C(x)\)}
+  \end{subfigure}
+  \begin{subfigure}{0.45\textwidth}
+    \begin{tikzpicture}
+      \begin{axis}[
+        xmin = 0, xmax = 25,
+        axis x line = middle,
+        axis y line = middle,
+        xlabel = \(x\),
+        ylabel = \(f(x)\)
+        ]
+        \addplot[
+        samples=1000,
+        smooth,
+        domain=0.38:25] {cos(deg(x))/sqrt(x)};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{\(f(x) = \frac{\cos(x)}{\sqrt{x}}\)}
+  \end{subfigure}
+  \caption{\(\Phi_C\)}
+\end{figure}
