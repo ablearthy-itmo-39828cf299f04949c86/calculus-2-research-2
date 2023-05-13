@@ -1,0 +1,83 @@
+\section{Задача № 3}
+
+При помощи формулы Остроградского-Гаусса докажите формулу трёхмерного
+интегрирования по частям:
+\[
+  \iiint_{T} U \laplacian V \dd v
+  = \oiint_{S} U \pdv{V}{\vec{n}} \dd s
+  - \iiint_{T} (\nabla U \cdot \nabla V) \dd v
+\]
+
+\subsection{Решение}
+
+\begin{equation}\label{eq:4-og}
+  \tag{Формула Гаусса-Остроградского}
+  \oiint_{S} \vec{F} \cdot \vec{n_0} \dd s
+  = \iiint_{T} \nabla \cdot \vec{F} \dd v
+\end{equation}
+
+Для начала заметим, что
+\[
+  \pdv{V}{\vec{n}} = \nabla V \cdot \vec{n}
+\]
+
+Тогда по формуле \ref{eq:4-og}
+\begin{equation}\label{eq:4-01}
+  \oiint_{S} U \pdv{V}{\vec{n}} \dd s
+  = \oiint_{S} U \nabla V \cdot \vec{n} \dd s
+  = \oiint_{S} U (\nabla V, \vec{n}) \dd s
+  = \oiint_{S} (U \nabla V, \vec{n}) \dd s
+  = \iiint_{T} \nabla (U \nabla V) \dd v
+\end{equation}
+
+Требуется доказать, что
+\[
+  \iiint_{T} U \laplacian V \dd v
+  + \iiint_{T} (\nabla U \cdot \nabla V) \dd v
+  = \oiint_{S} U \pdv{V}{\vec{n}} \dd s
+\]
+
+В силу равенства \ref{eq:4-01} требуется доказать, что
+\[
+  \iiint_{T} U \laplacian V \dd v
+  + \iiint_{T} (\nabla U \cdot \nabla V) \dd v
+  = \iiint_{T} \nabla \cdot (U \nabla V) \dd v
+\]
+
+Пусть
+\[
+  \nabla V
+  = \left(\pdv{V}{x}, \pdv{V}{y}, \pdv{V}{z}\right) \qquad
+  \nabla U
+  = \left(\pdv{U}{x}, \pdv{U}{y}, \pdv{U}{z}\right)
+\]
+
+Тогда
+\[
+\begin{split}
+  \nabla \cdot (U \nabla V)
+  = \nabla \cdot \left(U \pdv{V}{x} \vec{i} + U \pdv{V}{y} \vec{j} + U \pdv{V}{z} \vec{k}\right) \\
+  = \pdv{x} \left(U \pdv{V}{x}\right)
+  + \pdv{y} \left(U \pdv{V}{y}\right)
+  + \pdv{z} \left(U \pdv{V}{z}\right) \\
+  = \left(\pdv{U}{x} \pdv{V}{x} + U \pdv[2]{V}{x}\right)
+  + \left(\pdv{U}{y} \pdv{V}{y} + U \pdv[2]{V}{y}\right)
+  + \left(\pdv{U}{z} \pdv{V}{z} + U \pdv[2]{V}{z}\right) \\
+  = U\left(\pdv[2]{V}{x} + \pdv[2]{V}{y} + \pdv[2]{V}{z}\right)
+  + \left(\pdv{U}{x} \pdv{V}{x} + \pdv{U}{y} \pdv{V}{y} + \pdv{U}{z} \pdv{V}{z}\right)
+  = U \nabla^2 V + \nabla U \cdot \nabla V
+\end{split}
+\]
+
+Таким образом
+\[
+\begin{split}
+  \iiint_{T} U \laplacian V \dd v
+  + \iiint_{T} (\nabla U \cdot \nabla V) \dd v
+  = \oiint_{S} U \pdv{V}{\vec{n}} \dd s
+  = \iiint_{T} \nabla \cdot (U \nabla V) \dd v \\
+  = \iiint_{T} U \nabla^2 V + \nabla U \cdot \nabla V \dd v
+  = \iiint_{T} U \nabla^2 V \dd v + \iiint_{T} \nabla U \cdot \nabla V \dd v
+  \qed
+\end{split}
+\]
