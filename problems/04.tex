@@ -65,7 +65,7 @@
   + \left(\pdv{U}{z} \pdv{V}{z} + U \pdv[2]{V}{z}\right) \\
   = U\left(\pdv[2]{V}{x} + \pdv[2]{V}{y} + \pdv[2]{V}{z}\right)
   + \left(\pdv{U}{x} \pdv{V}{x} + \pdv{U}{y} \pdv{V}{y} + \pdv{U}{z} \pdv{V}{z}\right)
-  = U \nabla^2 V + \nabla U \cdot \nabla V
+  = U \laplacian V + \nabla U \cdot \nabla V
 \end{split}
 \]
 
@@ -76,8 +76,8 @@
   + \iiint_{T} (\nabla U \cdot \nabla V) \dd v
   = \oiint_{S} U \pdv{V}{\vec{n}} \dd s
   = \iiint_{T} \nabla \cdot (U \nabla V) \dd v \\
-  = \iiint_{T} U \nabla^2 V + \nabla U \cdot \nabla V \dd v
-  = \iiint_{T} U \nabla^2 V \dd v + \iiint_{T} \nabla U \cdot \nabla V \dd v
+  = \iiint_{T} U \laplacian V + \nabla U \cdot \nabla V \dd v
+  = \iiint_{T} U \laplacian V \dd v + \iiint_{T} \nabla U \cdot \nabla V \dd v
   \qed
 \end{split}
 \]
