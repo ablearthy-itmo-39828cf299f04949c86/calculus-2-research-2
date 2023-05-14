@@ -14,7 +14,6 @@ real f(real x){
 path p=graph(f, -1, 2, n=30, operator ..);
 path3 p3=path3(p, YZplane);
 
-
 revolution a=revolution(p3,Y,0,360);
 
 draw(surface(a), paleblue+opacity(0.5));
