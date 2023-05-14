@@ -305,3 +305,6 @@ TSWLatexianTemp*
 
 asy/*
 !asy/*.asy
+asy/main-*
+
+*.dep
